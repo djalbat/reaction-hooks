@@ -2,6 +2,8 @@
 
 Hooks for [Reaction](https://github.com/djalbat/reaction).
 
+*Please note that this project has yet to get started. If you come back later than you may be in luck.*
+
 ## Installation
 
 With [npm](https://www.npmjs.com/):
