@@ -2,12 +2,19 @@
 
 import { React } from "reaction";
 
+import { useContext } from "../../../../../index";  ///
+
 const { Component } = React;
 
 export default class CloseLinkButton extends Component {
+  getChildContext(context) {
+    useContext(this, [
+      "closeLinkButtonClickHandler"
+    ]);
+  }
+
   render(update) {
-    const { closeLinkButtonClickHandler } = this.context,
-          clickHandler = closeLinkButtonClickHandler;  ///
+    const clickHandler = this.closeLinkButtonClickHandler;  ///
 
     return (
 

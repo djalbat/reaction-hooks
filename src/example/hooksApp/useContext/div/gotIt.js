@@ -6,6 +6,18 @@ import GotItSpan from "../span/gotIt";
 import { useContext } from "../../../../index"; ///
 
 export default class GotItDiv extends Component {
+  getChildContext(context) {
+    const showGotItDiv = this.show.bind(this),  ///
+          hideGotItDiv = this.hide.bind(this);  ///
+
+    useContext(this, {
+      showGotItDiv,
+      hideGotItDiv
+    });
+
+    return context;
+  }
+
   render(update) {
     const { children } = this.props;
 
@@ -13,21 +25,11 @@ export default class GotItDiv extends Component {
 
       <div className="got-it">
         <GotItSpan/>
-        {children}
+        <p>
+          {children}
+        </p>
       </div>
 
     );
   }
-
-  // getChildContext(context) {
-  //   const showGotItDiv = this.show.bind(this),  ///
-  //         hideGotItDiv = this.hide.bind(this);  ///
-  //
-  //   useContext(this, {
-  //     showGotItDiv,
-  //     hideGotItDiv
-  //   });
-  //
-  //   return context;
-  // }
 }
