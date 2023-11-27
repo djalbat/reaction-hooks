@@ -6,16 +6,18 @@ const { createClass } = React;
 
 let initialCount = 0;
 
-export const ClassUseStateParagraph = createClass({
+const CreateClassUseStateParagraph = createClass({
   render: function(update) {
     const [ count, setCount ] = useState(this, initialCount);
 
     return (
 
       <p onClick={(event) => setCount(count + 1)}>
-        state: {`${count}`}
+        createClass state: {`${count}`}
       </p>
 
     );
   }
 });
+
+export default CreateClassUseStateParagraph;

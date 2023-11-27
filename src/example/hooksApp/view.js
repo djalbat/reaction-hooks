@@ -4,18 +4,20 @@ import { React } from "reaction";
 
 const { Component } = React;
 
-import { ClassUseStateParagraph } from "./useState/class";
-import { FunctionUseStateParagraph } from "./useState/function";
-import { ComponentUseStateParagraph } from "./useState/component";
+import GotItSection from "./useContext/section/gotIt";
+import FunctionUseStateParagraph from "./useState/function";
+import ComponentUseStateParagraph from "./useState/component";
+import CreateClassUseStateParagraph from "./useState/createClass";
 
 export default class View extends Component {
   render(update) {
     return (
 
       <div className="view">
-        <ClassUseStateParagraph/>
-        <FunctionUseStateParagraph/>
-        <ComponentUseStateParagraph/>
+        <GotItSection/>
+        {/*<FunctionUseStateParagraph/>*/}
+        {/*<ComponentUseStateParagraph/>*/}
+        {/*<CreateClassUseStateParagraph/>*/}
       </div>
 
     );
