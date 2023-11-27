@@ -8,7 +8,7 @@ let initialCount = 0;
 
 export class ComponentUseStateParagraph extends Component {
   render(update, element) {
-    const [ count, setCount ] = useState(initialCount, element);
+    const [ count, setCount ] = useState(element, initialCount);
 
     return (
 

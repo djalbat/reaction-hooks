@@ -7,8 +7,8 @@ const { createClass } = React;
 let initialCount = 0;
 
 export const ClassUseStateParagraph = createClass({
-  render: function(update, element) {
-    const [ count, setCount ] = useState(initialCount, element);
+  render: function(update) {
+    const [ count, setCount ] = useState(this, initialCount);
 
     return (
 
