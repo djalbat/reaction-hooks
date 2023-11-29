@@ -24,9 +24,7 @@ export function useState(element, initialState) {
   }]);
 }
 
-export function useContext(element, mapOrNames) {
-  const { context } = element;
-
+export function useContext(element, context, mapOrNames) {
   if (mapOrNames instanceof Array) {
     const names = mapOrNames; ///
 

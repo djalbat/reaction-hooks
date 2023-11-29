@@ -8,7 +8,7 @@ const { Component } = React;
 
 export default class CloseLinkButton extends Component {
   getChildContext(context) {
-    useContext(this, [
+    useContext(this, context, [
       "closeLinkButtonClickHandler"
     ]);
   }
