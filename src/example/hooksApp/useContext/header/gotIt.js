@@ -10,7 +10,7 @@ export default class GotItHeader extends Component {
     const showGotItHeader = this.show.bind(this), ///
           hideGotItHeader = this.hide.bind(this); ///
 
-    useContext(this, {
+    useContext(this, context, {
       showGotItHeader,
       hideGotItHeader
     });

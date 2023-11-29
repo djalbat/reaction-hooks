@@ -4,8 +4,6 @@ import GotItDiv from "../div/gotIt";
 import Component from "../component";
 import GotItHeader from "../header/gotIt";
 
-import { useContext } from "../../../../index"; ///
-
 export default class GotItSection extends Component {
   closeLinkButtonClickHandler = (event) => {
     this.close();
@@ -33,21 +31,14 @@ export default class GotItSection extends Component {
     const openLinkButtonClickHandler = this.openLinkButtonClickHandler,
           closeLinkButtonClickHandler = this.closeLinkButtonClickHandler;
 
-    useContext(this, {
+    return({
       openLinkButtonClickHandler,
       closeLinkButtonClickHandler
     });
-
-    return context;
   }
 
-  childContextSet(context) {
-    useContext(this, [
-      "showGotItDiv",
-      "hideGotItDiv",
-      "showGotItHeader",
-      "hideGotItHeader"
-    ]);
+  childContextSet(childContext) {
+    Object.assign(this, childContext);
   }
 
   componentDidMount() {

@@ -10,7 +10,7 @@ export default class GotItDiv extends Component {
     const showGotItDiv = this.show.bind(this),  ///
           hideGotItDiv = this.hide.bind(this);  ///
 
-    useContext(this, {
+    useContext(this, context, {
       showGotItDiv,
       hideGotItDiv
     });
