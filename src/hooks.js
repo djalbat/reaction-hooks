@@ -25,6 +25,10 @@ export function useState(element, initialState) {
 }
 
 export function useContext(element, context, mapOrNames) {
+  if (mapOrNames === undefined) {
+    mapOrNames = Object.keys(context);  ///
+  }
+
   if (mapOrNames instanceof Array) {
     const names = mapOrNames; ///
 
