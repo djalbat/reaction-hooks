@@ -1,4 +1,3 @@
 'use strict';
 
-export { useState } from "./hooks";
-export { useContext } from "./hooks";
+export { useState, useContext, useEffects } from "./hooks";
