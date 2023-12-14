@@ -7,14 +7,10 @@ import GotItHeader from "../header/gotIt";
 export default class GotItSection extends Component {
   closeLinkButtonClickHandler = (event) => {
     this.close();
-
-    event.preventDefault();
   }
 
   openLinkButtonClickHandler = (event) => {
     this.open();
-
-    event.preventDefault();
   }
 
   close() {
