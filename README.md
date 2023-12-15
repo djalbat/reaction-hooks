@@ -201,7 +201,7 @@ open() {
 }
 ```
 
-And by way of contrast, its own child `OpenLinkButton` grabs one of the topmost component's methods from the context and assigns it to itself. The method is then made use of in the `render()` method.
+By way of contrast, the descendant `OpenLinkButton` component grabs one of the topmost component's methods from the context and assigns it to itself. The method is then made use of in its `render()` method:
 
 ```
 export default class OpenLinkButton extends Component {
@@ -225,8 +225,7 @@ export default class OpenLinkButton extends Component {
   }
 }
 ```
-Essentially then the `useContext()` hook allows methods and the like to piggy back on the context, so to speak, so that other components can pick them up and make use of them. Thus the various closely related components can call methods on each other without the need for more complex mechanisms such as message passing.
-
+Essentially then the `useContext()` hook allows methods and the like to piggy back on the context, so to speak, so that components can pick them up and make use of them. Thus related components can call methods on each other without the need for more complex or indirect mechanisms such as message passing.
 
 ### `useEffects()`
 
