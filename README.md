@@ -30,15 +30,15 @@ You can also run a development server, see the section on building later on.
 
 The three hooks are imported thus:
 
-...
+```
 import { useState, useContext, useEffects } from "reaction-hooks";
-...
+```
 
 The only other function is `emitEffect()`, which can be obtained by destructuring the `useEffects()` hook:
 
-...
+```
 const { emitEffect } = useEffects;
-...
+```
 
 Detailed usages are outlined in the example section that follows.
 
