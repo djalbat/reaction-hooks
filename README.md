@@ -26,6 +26,22 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 You can also run a development server, see the section on building later on.
 
+## Usage
+
+The three hooks are imported thus:
+
+...
+import { useState, useContext, useEffects } from "reaction-hooks";
+...
+
+The only other function is `emitEffect()`, which can be obtained by destructuring the `useEffects()` hook:
+
+...
+const { emitEffect } = useEffects;
+...
+
+Detailed usages are outlined in the example section that follows.
+
 ## Building
 
 Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
