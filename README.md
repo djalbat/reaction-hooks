@@ -168,7 +168,7 @@ childContextSet(childContext) {
 ```
 In the `getChildContext()` lifecycle method, two of the topmost component's own methods are assigned to the context, a reference to which is then passed to the component's children. Conversely, in the `childContextSet()` lifecycle method, whatever methods are on the child context at this point, which will have been assigned by the children, are assigned to the topmost component.
 
-Beginning to look down the DOM hierarchy at the component's children, we see that the `GotItHeader` component adds two of its own methods to the context:
+Beginning to look down at the component's children, we see that the `GotItHeader` component adds two of its own methods to the context:
 
 ```
 export default class GotItHeader extends Component {
@@ -187,6 +187,20 @@ export default class GotItHeader extends Component {
   ...
 }
 ```
+These will eventually be picked up by the topmost component in its aforementioned `childContextSet()` lifecycle method. Indeed we can see which methods of the component's children it ends up assigning to itself by looking at some of its other methods:
+
+```
+close() {
+  this.hideGotItDiv();
+  this.showGotItHeader();
+}
+
+open() {
+  this.showGotItDiv();
+  this.hideGotItHeader();
+}
+```
+
 And by way of contrast, its own child `OpenLinkButton` grabs one of the topmost component's methods from the context and assigns it to itself. The method is then made use of in the `render()` method.
 
 ```
