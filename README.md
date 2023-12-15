@@ -302,7 +302,7 @@ export default class HomeArticle extends Article {
   }
 }
 ```
-It is usual to configure a component to call an `updateHandler()` method, the reason being that whereas in this case the body of this method is benign in the sense that the component is not redrawn, often it is the case that the component does need to be redrawn, in which case Reaction provides a standard mechanism to do this. Precisely:
+It is usual to configure a component to call an `updateHandler()` handler method in response to an effect being used, the reason being that whereas in this case the body of the handler method is benign in the sense that the component is not redrawn, often it is the case that the component does need to be redrawn, in which case Reaction provides a standard mechanism to do so. Precisely:
 
 ```
 updatehandler(update) {
@@ -310,9 +310,9 @@ updatehandler(update) {
 }
 ```
 
-Underneath the hood the `forceUpdate()` method will unmount the component's children and then mount the new children returned by invoking the component's `render()` method, passing it the update. In fact the update is just a plain old JavaScript object the single property of which is named after the effect and its value is the effect itself. 
+Underneath the hood the `forceUpdate()` method will unmount the component's children and then mount the new children returned by invoking the component's `render()` method, which is passed the requisite update. In fact the update is just a plain old JavaScript object the single property of which is named after the effect and its value is the effect itself. 
 
-Finally, note that a component or indeed any part of the application can be configured to listen to several effects as additional arguments to the `useEffect()` hook, in which cases the encapculation of each effect in a plain old JavaScript object becomes invaluable for ascertaining which effect has been emitted. 
+Finally, note that a component or indeed any part of the application can be configured to listen to several effects as additional arguments to the `useEffects()` hook, hence the use of the plural, in which cases the encapculation of each effect in a plain old JavaScript object becomes invaluable for ascertaining which effect has been emitted. 
 
 ## Building
 
