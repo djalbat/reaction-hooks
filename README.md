@@ -75,7 +75,7 @@ Note that the last of the four function arguments is a reference to the function
 
 Because the `useState()` hook is passed a reference to the corresponding element under the hood, so to speak, it should come as no surprise that can also support created classes and components, which also both have corresponding underlying elements.
 
-The second way is with created classes. The name is a misnomer as they are not classes at all and rarely if ever utilised. They are supported for the sake of completeness, however:
+The second way is with created classes. The name is a misnomer as they are not classes and they are, with the advent of components, rarely if ever used anymore. Nonetheless they are supported:
 
 ```
 const { createClass } = React;
