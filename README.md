@@ -125,7 +125,9 @@ Of course created classes and components support state without the need for a ho
 
 ### `useContext()`
 
-This hook can be used comprehensively to share information, most likely methods, between components and the like that are directly related in the DOM. What this means is that in order for one component to share information with another one must be a descendant of the other. Since this hooks leverages contexts, perhaps this is not so surprising. In fact another lifecycle method, namely `childContextSet()`, was added to Reaction in order to support it. At the topmost level of the example component both this lifecycle method and the more commonly known `setChildContext()` lifecycle method are utilised: 
+This hook can be used comprehensively to share information, most likely methods, between components and the like that are directly related in the DOM. What this means is that in order for one component to share information with another it must be a descendant of the other or vice-versa. Since this hook leverages contexts, perhaps this is not so surprising. In fact another lifecycle method, namely the `childContextSet()`lifecycle method, was added to Reaction in order to support it. 
+
+At the topmost level of the example component both this lifecycle method and the more commonly known `setChildContext()` lifecycle method are utilised: 
 
 ```
 getChildContext(context) {
@@ -143,7 +145,7 @@ childContextSet(childContext) {
 }
 ```
 
-This usage is noteworthy because it does not make use of the `useContext()` hook at all. A more primitive approach is used here to emphasise that the object created in the `createChildContext()` lifecycle method is not only the only that it passed down the components children but is also precisely the one that is passed as an argument to the `childContextSet()` lifecycle method.
+This usage is noteworthy because it does not make use of the `useContext()` hook at all. A more primitive approach is used here to emphasise the fact that the object created in the `createChildContext()` lifecycle method is not only passed down to the component's children but is also precisely the one that is passed to the component's own  `childContextSet()` lifecycle method.
 
 A more conventional and indeed the recommended approach is to make use of the `useContetx()` hook in both lifecycle methods in each of its respective guises:
 
@@ -164,7 +166,53 @@ childContextSet(childContext) {
   useContext(this. childContext);
 }
 ```
-In the `getChildContext()` lifecycle method, two of the topmost component's own methods are assigned to the context, a reference to which is then passed to the component's children. Conversely, in the `childContextSet()` lifecycle method, whatever methods are on the child context at this point, which will have been assigned by the children, are assigned to the topmost component.  
+In the `getChildContext()` lifecycle method, two of the topmost component's own methods are assigned to the context, a reference to which is then passed to the component's children. Conversely, in the `childContextSet()` lifecycle method, whatever methods are on the child context at this point, which will have been assigned by the children, are assigned to the topmost component.
+
+Beginning to look down the DOM hierarchy at the component's children, we see that the `GotItHeader` component adds two of its own methods to the context:
+
+```
+export default class GotItHeader extends Component {
+  getChildContext(context) {
+    const showGotItHeader = this.show.bind(this), ///
+          hideGotItHeader = this.hide.bind(this); ///
+
+    useContext(this, context, {
+      showGotItHeader,
+      hideGotItHeader
+    });
+
+    return context;
+  }
+
+  ...
+}
+```
+And by way of contrast, its own child `OpenLinkButton` grabs one of the topmost component's methods from the context and assigns it to itself. The method is then made use of in the `render()` method.
+
+```
+export default class OpenLinkButton extends Component {
+  getChildContext(context) {
+    useContext(this, context, [
+      "openLinkButtonClickHandler"
+    ]);
+  }
+
+  render(update) {
+    const { children } = this.props,
+          clickHandler = this.openLinkButtonClickHandler;  ///
+
+    return (
+
+      <button className="open link" onClick={clickHandler}>
+        {children}
+      </button>
+
+    );
+  }
+}
+```
+Essentially then the `useContext()` hook allows methods and the like to piggy back on the context, so to speak, so that other components can pick them up and make use of them. Thus the various closely related components can call methods on each other without the need for more complex mechanisms such as message passing.
+
 
 ### `useEffects()`
 
