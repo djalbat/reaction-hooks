@@ -40,7 +40,42 @@ The only other function is `emitEffect()`, which can be obtained by destructurin
 const { emitEffect } = useEffects;
 ```
 
-Detailed usages are outlined in the example section that follows.
+Detailed usages are outlined in the recommanded patterns section that follows the example section.
+
+## Example
+
+Launch the `exampleshtml` file. There is a single hooks example which encapsulates all of the hooks.
+
+## Recommended patterns
+
+Each of the hooks are covered separately and the listing closely match the example.
+
+### `useState()`
+
+There are three ways to use the `useState()` hook. The first will be familiar to React users because it enables functional elements to maintain state:
+
+```
+import { useState } from "../../../index";  ///
+
+const initialCount = 0;
+
+const FunctionUseStateParagraph = (props, context, update, element) => {
+  const [ count, setCount ] = useState(element, initialCount);
+
+  return (
+
+    <p onClick={(event) => setCount(count + 1)}>
+      Function state: {`${count}`}
+    </p>
+
+  );
+};
+```
+Note that the last of the four function arguments is a reference to the function's corresponding React element. The details are unimportant, however this reference must be passed as the first argument of the `useState()` call. Otherwise the usage is entirely analogous to the corresponding React hook.   
+
+### `useContext()`
+
+### `useEffects()`
 
 ## Building
 
