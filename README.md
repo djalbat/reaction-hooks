@@ -229,6 +229,91 @@ Essentially then the `useContext()` hook allows methods and the like to piggy ba
 
 ### `useEffects()`
 
+This hook was added to solve the problem of communication between components that do not share the same context, or to allow other parts of the application to communicate with components or vice-versa. Essentially an effect is a named object, it can be a plain old JavaScript object, a function, a class instance or whatever, that is emitted by one part of the application and subsequently used by another. 
+
+In the example, primary navigation buttons emit effects that are then picked up by articles, which hide or show themselves depending on whether or not their names match the effects. Specifically, there is a base `Button` component that emits an `articleName` effect...
+
+```
+export default class Button extends Component {
+  clickHandler = (event) => {
+    const { articleName } = this.constructor;
+
+    emitEffect("articleName", articleName);
+  }
+
+  render(update) {
+    const { text } = this.constructor;
+
+    return (
+
+      <button onClick={this.clickHandler}>
+        {text}
+      </button>
+
+    );
+  }
+}
+```
+
+...the sub-components of which are configured to correspond to a particular article:
+
+```
+import Button from "../button";
+
+export default class HomeButton extends Button {
+  static text = "Home";
+
+  static articleName = "home";
+}
+```
+
+The corresponding `Article` component uses this effect...
+
+```
+export default class Article extends Component {
+  updateHandler = (update) => {
+    const { name } = this.constructor,
+          { articleName } = update;
+
+    (name === articleName) ?
+      this.show() :
+        this.hide();
+  }
+
+  componentDidMount() {
+    this.discardEffects = useEffects(this.updateHandler, "articleName");
+  }
+
+  componentWillUnmount() {
+    this.discardEffects();
+  }
+}
+```
+...with again its sub-components being configured with specific names:
+
+```
+import Article from "../article";
+
+export default class HomeArticle extends Article {
+  static name = "home";
+
+  render(update) {
+    ...
+  }
+}
+```
+It is usual to configure a component to call an `updateHandler()` method, the reason being that whereas in this case the body of this method is benign in the sense that the component is not redrawn, often it is the case that the component does need to be redrawn, in which case Reaction provides a standard mechanism to do this. Precisely:
+
+```
+updatehandler(update) {
+  this.forceUpdate();
+}
+```
+
+Underneath the hood the `forceUpdate()` method will unmount the component's children and then mount the new children returned by invoking the component's `render()` method, passing it the update. In fact the update is just a plain old JavaScript object the single property of which is named after the effect and its value is the effect itself. 
+
+Finally, note that a component or indeed any part of the application can be configured to listen to several effects as additional arguments to the `useEffect()` hook, in which cases the encapculation of each effect in a plain old JavaScript object becomes invaluable for ascertaining which effect has been emitted. 
+
 ## Building
 
 Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
