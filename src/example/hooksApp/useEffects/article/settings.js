@@ -8,7 +8,7 @@ export default class SettingsArticle extends Article {
   render(update) {
     return (
 
-      <article className="settings" style={{display: "none"}}>
+      <article className="settings" >
         <h1>
           Settings
         </h1>

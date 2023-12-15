@@ -1,12 +1,12 @@
 "use strict";
 
-import { React } from "reaction";
-
 const { Component } = React;
 
 import MainSection from "./useEffects/section/main";
 import GotItSection from "./useContext/section/gotIt";
 import FunctionUseStateParagraph from "./useState/function";
+import ComponentUseStateParagraph from "./useState/component";
+import CreateClassUseStateParagraph from "./useState/createClass";
 
 export default class View extends Component {
   render(update) {
@@ -17,6 +17,10 @@ export default class View extends Component {
           useState
         </h2>
         <FunctionUseStateParagraph/>
+        <br/>
+        <CreateClassUseStateParagraph/>
+        <br/>
+        <ComponentUseStateParagraph/>
         <h2>
           useContext
         </h2>

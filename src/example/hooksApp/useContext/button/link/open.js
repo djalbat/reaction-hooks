@@ -1,7 +1,5 @@
 "use strict";
 
-import { React } from "reaction";
-
 import { useContext } from "../../../../../index";  ///
 
 const { Component } = React;

@@ -1,7 +1,5 @@
 "use strict";
 
-import { React } from "reaction";
-
 const { Component } = React;
 
 import { NONE, BLOCK, DISPLAY } from "./constants";

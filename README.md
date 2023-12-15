@@ -4,11 +4,11 @@ Hooks for [Reaction](https://github.com/djalbat/reaction).
 
 These are inspired by React's hooks but do not follow them slavishly. Three are three available:
 
-* `useState()` A state management hook that indeed does closely follow React's hook of the same name, but also supports both kinds of React components.
+* `useState()` A state management hook that does indeed closely follow React's hook of the same name. It also supports components and created classes, however.
 * `useContext()` A hook that leverages contexts in order to enable components directly related to one another in the DOM to communicate. Typically component methods are passed via the context so that one component can call the methods of another.
-* `useEffects()` A hook that use Reaction's in-built updates functionality in order to enable components to communicate no matter their relative positions in the DOM. It is also possible for other parts of an application to communicate with view components in this manner.
+* `useEffects()` A hook that use Reaction's in-built updates functionality in order to enable components to communicate no matter their relative positions in the DOM. It is also possible to communicate with other parts of an application in this manner.
 
-The `useEffects()` hook in fact bears very little resemblance to React's hook of the same name and is more akin to [Inference](https://github.com/djalbat/inference). In fact it is a bit like Inference without the rules.   
+The `useEffects()` hook in fact bears very little resemblance to React's hook of the same name and is more akin to [Inference](https://github.com/djalbat/inference) but without the rules.   
 
 ## Installation
 
