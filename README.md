@@ -125,6 +125,8 @@ Of course created classes and components support state without the need for a ho
 
 ### `useContext()`
 
+This hook can be used comprehensively to share information, most likely methods, between elements that are directly related in the DOM. The example has a moderately complex component whose various parts make use of this hook in all of the recommended ways. The hook itself relies heavily on Reaction's context functionality. In fact another lifecycle method, namely `childContextSet()`, was added in order to support this hook. At the topmost level of the example component both this lifecycle method and the more commonly known `setChildContext()` lifecycle method are utilised: 
+
 ### `useEffects()`
 
 ## Building
