@@ -1,7 +1,7 @@
 {
   "name": "reaction-hooks",
   "author": "James Smith",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/reaction-hooks",
   "description": "Hooks for Reaction.",
@@ -10,7 +10,7 @@
     "url": "https://github.com/djalbat/reaction-hooks"
   },
   "dependencies": {
-    "reaction": "^4.0.38"
+    "reaction": "^4.0.41"
   },
   "devDependencies": {
     "@swc/core": "^1.2.50",
