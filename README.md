@@ -180,7 +180,7 @@ childContextSet(childContext) {
   useContext(this. childContext);
 }
 ```
-In the `getChildContext()` lifecycle method, two of the topmost component's own methods are assigned to the context, a reference to which is then passed to the component's children. Conversely, in the `childContextSet()` lifecycle method, whatever methods are on the child context at this point, which will have been assigned by the children, are assigned to the topmost component.
+In the `getChildContext()` lifecycle method, two of the topmost component's own methods are assigned to the context, which is then passed to the component's children. Conversely, in the `childContextSet()` lifecycle method, whatever methods are on the child context at this point, which will have been assigned by the topmost component's children, are assigned to the topmost component.
 
 Beginning to look down at the component's children, we see that the `GotItHeader` component adds two of its own methods to the context:
 
@@ -212,6 +212,19 @@ close() {
 open() {
   this.showGotItDiv();
   this.hideGotItHeader();
+}
+```
+
+Therefore, in order to be explicit, which is recommended, we could have written:
+
+```
+childContextSet(childContext) {
+  useContext(this. childContext, [
+    "showGotItDiv",
+    "hideGotItDiv",
+    "showGotItHeader",
+    "hideGotItHeader"
+  ]);
 }
 ```
 
