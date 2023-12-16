@@ -159,7 +159,7 @@ childContextSet(childContext) {
 }
 ```
 
-This usage is noteworthy because it does not make use of the `useContext()` hook at all. A more primitive approach is used here to emphasise the fact that the object created in the `createChildContext()` lifecycle method is not only passed down to the component's children but is also precisely the one that is passed to the component's own  `childContextSet()` lifecycle method.
+This usage is noteworthy because it does not make use of the `useContext()` hook at all. A more primitive approach is used here to emphasise the fact that the object created in the `createChildContext()` lifecycle method is not only passed down to the component's descendants but is also precisely the one that is passed to the component's own  `childContextSet()` lifecycle method.
 
 A more conventional and indeed the recommended approach is to make use of the `useContetx()` hook in both lifecycle methods in each of its respective guises:
 
@@ -177,12 +177,12 @@ getChildContext(context) {
 }
 
 childContextSet(childContext) {
-  useContext(this. childContext);
+  useContext(this, childContext);
 }
 ```
-In the `getChildContext()` lifecycle method, two of the topmost component's own methods are assigned to the context, which is then passed to the component's children. Conversely, in the `childContextSet()` lifecycle method, whatever methods are on the child context at this point, which will have been assigned by the topmost component's children, are assigned to the topmost component.
+In the `getChildContext()` lifecycle method, two of the topmost component's own methods are assigned to the context, which is then passed to the component's descendants. Conversely, in the `childContextSet()` lifecycle method, whatever methods are on the child context at this point, which will have been assigned by the topmost component's descendants, are assigned to the topmost component.
 
-Beginning to look down at the component's children, we see that the `GotItHeader` component adds two of its own methods to the context:
+Beginning to look down at the component's descendants, we see that the `GotItHeader` component adds two of its own methods to the context:
 
 ```
 export default class GotItHeader extends Component {
@@ -201,7 +201,7 @@ export default class GotItHeader extends Component {
   ...
 }
 ```
-These will eventually be picked up by the topmost component in its aforementioned `childContextSet()` lifecycle method. Indeed we can see which methods of the component's children it ends up assigning to itself by looking at some of its other methods:
+These will eventually be picked up by the topmost component in its aforementioned `childContextSet()` lifecycle method. Indeed we can see which methods of the component's descendants it ends up assigning to itself by looking at some of its other methods:
 
 ```
 close() {
@@ -215,11 +215,11 @@ open() {
 }
 ```
 
-Therefore, in order to be explicit, which is recommended, we could have written:
+Therefore in order to be explicit we could have written:
 
 ```
 childContextSet(childContext) {
-  useContext(this. childContext, [
+  useContext(this, childContext, [
     "showGotItDiv",
     "hideGotItDiv",
     "showGotItHeader",
@@ -228,7 +228,7 @@ childContextSet(childContext) {
 }
 ```
 
-By way of contrast, the descendant `OpenLinkButton` component grabs one of the topmost component's methods from the context and assigns it to itself. The method is then made use of in its `render()` method:
+By way of contrast, the descendant `OpenLinkButton` component grabs one of the topmost component's methods from the context and assigns it to itself. The method is then made use of in its own `render()` method:
 
 ```
 export default class OpenLinkButton extends Component {
@@ -239,20 +239,21 @@ export default class OpenLinkButton extends Component {
   }
 
   render(update) {
-    const { children } = this.props,
+    const { descendants } = this.props,
           clickHandler = this.openLinkButtonClickHandler;  ///
 
     return (
 
       <button className="open link" onClick={clickHandler}>
-        {children}
+        {descendants}
       </button>
 
     );
   }
 }
 ```
-Essentially then the `useContext()` hook allows methods and the like to piggy back on the context, so to speak, so that components can pick them up and make use of them. Thus related components can call methods on each other without the need for more complex or indirect mechanisms such as message passing.
+
+To summarise, the `useContext()` hook allows methods and the like to piggy back on the context, so to speak, so that components can pick them up and make use of them. Thus related components can call methods on each other without the need for more complex or indirect mechanisms such as message passing.
 
 ### `useEffects()`
 
@@ -337,7 +338,7 @@ updatehandler(update) {
 }
 ```
 
-Underneath the hood the `forceUpdate()` method will unmount the component's children and then mount the new children returned by invoking the component's `render()` method, which is passed the requisite update. In fact the update is just a plain old JavaScript object the single property of which is named after the effect and its value is the effect itself. 
+Underneath the hood the `forceUpdate()` method will unmount the component's descendants and then mount the new descendants returned by invoking the component's `render()` method, which is passed the requisite update. In fact the update is just a plain old JavaScript object the single property of which is named after the effect and its value is the effect itself. 
 
 Finally, note that a component or indeed any part of the application can be configured to listen to several effects as additional arguments to the `useEffects()` hook, hence the use of the plural, in which cases the encapsulation of each effect in a plain old JavaScript object becomes invaluable for ascertaining which effect has been emitted. 
 
