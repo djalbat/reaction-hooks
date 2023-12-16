@@ -62,7 +62,7 @@ One last thing to bear in mind is that this package is included by way of a rela
 
 ## Recommended patterns
 
-Each of the hooks are covered with the listings closely matching the example code.
+Each of the hooks are covered in turn with the listings closely matching the example code.
 
 ### `useState()`
 
@@ -87,9 +87,9 @@ const FunctionUseStateParagraph = (props, context, update, element) => {
 ```
 Note that the last of the four function arguments is a reference to the function's corresponding element. The details are unimportant, however this reference must be passed as the first argument of the `useState()` call. Otherwise the usage is entirely analogous to the corresponding React hook.
 
-Because the `useState()` hook is passed a reference to the corresponding element under the hood, so to speak, it should come as no surprise that can also support created classes and components, which also both have corresponding underlying elements.
+Because the `useState()` hook is passed a reference to the corresponding element it can also support created classes and components, which also both have corresponding underlying elements.
 
-The second way is with created classes. The name is a misnomer as they are not classes and they are, with the advent of components, rarely if ever used anymore. Nonetheless they are supported:
+To continue, the second way is with created classes. The name is a misnomer as they are not classes at all. With the advent of components they rarely if ever used, nonetheless they continue to be supported:
 
 ```
 const { createClass } = React;
@@ -111,7 +111,7 @@ const CreateClassUseStateParagraph = createClass({
 });
 ```
 
-Essentially the only difference between this usage and the functional usage is that the `useState()` call takes place within the `render()` function.
+Note that the `useState()` call takes place within the `render()` function.
 
 Lastly, genuine components, which are treated identically:
 
@@ -135,13 +135,13 @@ export default class ComponentUseStateParagraph extends Component {
 }
 ```
 
-Of course created classes and components support state without the need for a hook. At the risk of repetition, support for the `useState()` hook cost virtually nothing and is included more for the sake of completeness than for anything else.
+Of course created classes and components support state without the need for a hook.
 
 ### `useContext()`
 
 This hook can be used comprehensively to share information, most likely methods, between components and the like that are directly related in the DOM. What this means is that in order for one component to share information with another it must be a descendant of the other or vice-versa. Since this hook leverages contexts, perhaps this is not so surprising. In fact another lifecycle method, namely the `childContextSet()`lifecycle method, was added to Reaction in order to support it. 
 
-At the topmost level of the example component both this lifecycle method and the more commonly known `setChildContext()` lifecycle method are utilised: 
+At the topmost level of the example component both this lifecycle method and the `setChildContext()` lifecycle method are utilised: 
 
 ```
 getChildContext(context) {
@@ -326,7 +326,7 @@ updatehandler(update) {
 
 Underneath the hood the `forceUpdate()` method will unmount the component's children and then mount the new children returned by invoking the component's `render()` method, which is passed the requisite update. In fact the update is just a plain old JavaScript object the single property of which is named after the effect and its value is the effect itself. 
 
-Finally, note that a component or indeed any part of the application can be configured to listen to several effects as additional arguments to the `useEffects()` hook, hence the use of the plural, in which cases the encapculation of each effect in a plain old JavaScript object becomes invaluable for ascertaining which effect has been emitted. 
+Finally, note that a component or indeed any part of the application can be configured to listen to several effects as additional arguments to the `useEffects()` hook, hence the use of the plural, in which cases the encapsulation of each effect in a plain old JavaScript object becomes invaluable for ascertaining which effect has been emitted. 
 
 ## Building
 
