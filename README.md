@@ -335,8 +335,6 @@ Automation is thanks to [npm scripts](https://docs.npmjs.com/misc/scripts), have
     npm run build-debug
     npm run watch-debug
 
-The example will then be available at http://localhost:8888 and will reload automatically when changes are made.
-
 ## Contact
 
 - james.smith@djalbat.com
