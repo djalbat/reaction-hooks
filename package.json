@@ -1,7 +1,7 @@
 {
   "name": "reaction-hooks",
   "author": "James Smith",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/reaction-hooks",
   "description": "Hooks for Reaction.",
@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "lively-cli": "^2.0.77",
     "reaction": "^4.0.62",
-    "watchful-cli": "^1.7.61"
+    "watchful-cli": "^1.7.63"
   },
   "scripts": {
     "start": "node ./bin/main.js",
