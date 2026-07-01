@@ -50,7 +50,7 @@ export function useContext(element, context, mapOrNames) {
     mapOrNames = Object.keys(context);  ///
   }
 
-  if (mapOrNames instanceof Array) {
+  if (Array.isArray(mapOrNames)) {
     const names = mapOrNames; ///
 
     names.forEach((name) => {
